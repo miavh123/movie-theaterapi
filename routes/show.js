@@ -1,17 +1,19 @@
 const router = express.Router();
 const express = require ('express')
 const {check,validationResult}= require('express-validator');
-const {Show,User}= require ('./models/index');
+const {Show,User}= require ('../models/index');
 
 
 
 
 router.get('/', async (req,res)=>{
-    res.json(await Show.findAll())
+    const show = await Show.findAll()
+    res.json(show)
 })
 
 router.get('/:id', async(req,res)=>{
-    res.json(await Show.findByPk(req.params.id))
+    const showId = await Show.findByPk(req.params.id)
+    res.json(showId)
 })
 
 router.get('genres/:genreId', async(req,res)=>{
@@ -21,6 +23,7 @@ router.get('genres/:genreId', async(req,res)=>{
         }
     }))
     res.json(genreId)
+
 })
 
 router.put('/:ratingId/rating',async (req,res)=>{
